@@ -70,7 +70,8 @@ def scan_udp_port(port):
 def detect_service(s, port):
     try:
         if port in [80, 443]:  # Common HTTP/S ports
-            s.send(b'HEAD / HTTP/1.1\r\nHost: {}\r\n\r\n'.format(target).encode())
+            # Corrected the string formatting
+            s.send(f'HEAD / HTTP/1.1\r\nHost: {target}\r\n\r\n'.encode())
             banner = s.recv(1024).decode().strip()
             print(f"Service detected on TCP Port {port}: {banner}")
             logging.info(f"Service detected on TCP Port {port}: {banner}")
@@ -80,16 +81,11 @@ def detect_service(s, port):
         elif port == 22:
             print(f"SSH service detected on TCP Port {port}")
             logging.info(f"SSH service detected on TCP Port {port}")
-        elif port == 23:
-            print(f"Telnet service detected on TCP Port {port}")
-            logging.info(f"Telnet service detected on TCP Port {port}")
-        elif port == 25:
-            print(f"SMTP service detected on TCP Port {port}")
-            logging.info(f"SMTP service detected on TCP Port {port}")
         # Add more services as needed
     except Exception as e:
         print(f"Service detection failed on port {port}: {e}")
         logging.error(f"Service detection failed on port {port}: {e}")
+
 
 # Asynchronous Port Scanning
 async def scan_port_async(port):
