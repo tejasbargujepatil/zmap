@@ -1,0 +1,7 @@
+# requirements.txt
+
+# Python Standard Libraries - No installation required
+# Ensure you're using Python 3.x
+
+# If you add any third-party libraries in the future, list them here:
+# e.g., requests==2.26.0
